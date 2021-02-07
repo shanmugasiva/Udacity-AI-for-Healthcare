@@ -36,10 +36,15 @@
     * Patient Position should be either AP or PA 
 
 **Preprocessing Steps:**
+We use the off-the-shelf ImageDataGenerator class from the Keras framework, which allows us to build a "generator" for images specified in a training data. This class also provides support for basic data augmentation such as random horizontal flipping of images. we also use the generator to transform the values in each batch so that their mean is 0 and their standard deviation is 1. This will facilitate the model training by standardizing the input distribution. We also convert RGB to Grayscale (if needed) and re-sizes the image to 244 x 244( as required by the model). 
+
+We only normalize the images in validation dataset to resemble the real world data as closely as possible. This alogorithm is evaluated using this dataset
+
 * Following steps are performed during preprocessing
     * Images are converted to grayscale.
     * Pixels are normalized.
     * Images are reshaped to 224 x 224 to confrom with the input shape for VGG16 architecture. 
+ 
 
 **CNN Architecture:**
 * The algorithm uses pre-trained VGG16 Neural Network, where only the last block of convolution and pooling layers were re-trained, with additional 2 blocks of fully Connected and dropout layers.
@@ -129,6 +134,19 @@
 
 **Description of Validation Dataset:** 
 * Validation dataset consisted of 1430 chest xray images, with 20/80 split between positive and negative cases, which more reflects the occurence of pneumonia in the real world.
+
+**Gender Distribution of patients in both training and testing Datasets:** 
+![Training Set Gender Images](https://github.com/shanmugasiva/Udacity-AI-for-Healthcare/blob/main/Applying%20AI%20to%202D%20Medical%20Imaging%20Data/Course%20Project%20-%20Pneumonia%20Detection%20from%20Chest%20X-Rays/img/AgeDistribution.JPG)
+
+**Age Distribution of patients in both training and testing Datasets:** 
+![Training Set AGE Images](https://github.com/shanmugasiva/Udacity-AI-for-Healthcare/blob/main/Applying%20AI%20to%202D%20Medical%20Imaging%20Data/Course%20Project%20-%20Pneumonia%20Detection%20from%20Chest%20X-Rays/img/AgeDistribution_Train.JPG)
+
+![Testing Set AGE Images](https://github.com/shanmugasiva/Udacity-AI-for-Healthcare/blob/main/Applying%20AI%20to%202D%20Medical%20Imaging%20Data/Course%20Project%20-%20Pneumonia%20Detection%20from%20Chest%20X-Rays/img/AgeDistrubutionValid.JPG)
+
+**Prevalence Disease Distribution of patients in both training and testing Datasets:** 
+![Training Set Prev AGE Images](https://github.com/shanmugasiva/Udacity-AI-for-Healthcare/blob/main/Applying%20AI%20to%202D%20Medical%20Imaging%20Data/Course%20Project%20-%20Pneumonia%20Detection%20from%20Chest%20X-Rays/img/disease_train.JPG)
+
+![Validation Set Prev AGE Images](https://github.com/shanmugasiva/Udacity-AI-for-Healthcare/blob/main/Applying%20AI%20to%202D%20Medical%20Imaging%20Data/Course%20Project%20-%20Pneumonia%20Detection%20from%20Chest%20X-Rays/img/disease_valid.JPG)
 
 ### 5. Ground Truth
 * The **ground truth** is obtained using Natural Language Processing (NLP) approach to mine the radiologist reports. Since, these labels were obtained using NLP, which is expected to be accurate enough for > 90% cases, still there might be some errenous labels.
